@@ -12,19 +12,31 @@ class Logger():
         self.logger.setLevel(logging.DEBUG)
 
         fh = logging.FileHandler(logname)
-        fh.setLevel(logging.DEBUG)
-
         ch = logging.StreamHandler()
-        ch.setLevel(logging.DEBUG)
-
-        formatter = logging.Formatter('%(asctime)s - %(filename)s- %(module)s - %(funcName)s - %(levelname)s - %(message)s')
+        if loglevel == 'ERROR':
+            fh.setLevel(logging.ERROR)
+            ch.setLevel(logging.ERROR)
+        elif loglevel == 'WARNING':
+            fh.setLevel(logging.WARNING)
+            ch.setLevel(logging.WARNING)    
+        elif loglevel == 'INFO':
+            fh.setLevel(logging.INFO)
+            ch.setLevel(logging.INFO)
+        elif loglevel == 'DEBUG':
+            fh.setLevel(logging.DEBUG)
+            ch.setLevel(logging.DEBUG)
+        else:
+            print 'Set a wrong log level:', loglevel
+            return 
+        
+        formatter = logging.Formatter('%(asctime)s - %(module)s - %(funcName)s - %(lineno)s - %(levelname)s - %(message)s')
         #formatter = format_dict[int(loglevel)]
         fh.setFormatter(formatter)
         ch.setFormatter(formatter)
 
         self.logger.addHandler(fh)
         self.logger.addHandler(ch)
-
+        return
     
     def getlogger(self):
         return self.logger
