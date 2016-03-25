@@ -1,0 +1,5 @@
+2016-03-24 18:02:08,234 - <module> - INFO - Process pid is not valid,skip it.
+2016-03-24 18:03:51,851 - %(module) - s<module> - INFO - Process pid is not valid,skip it.
+2016-03-24 18:04:21,915 - %(module) - s<module> - INFO - Process pid is not valid,skip it.
+2016-03-24 18:05:03,999 - <module>- logger - <module> - INFO - Process pid is not valid,skip it.
+2016-03-24 18:05:32,076 - logger.py- logger - <module> - INFO - Process pid is not valid,skip it.

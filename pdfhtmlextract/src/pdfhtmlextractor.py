@@ -1,7 +1,5 @@
 #coding=gbk
-import new
-from win32print import EndPage
-from BeautifulSoup import PageElement
+
 __author__ = 'CQC'
 # -*- coding:utf-8 -*-
  
@@ -10,19 +8,31 @@ from bs4 import BeautifulSoup
 import urllib2
 import re
 import table
+import logger
 
 class PdfHtmlExtractor(object):
-    pdfhtmlfile = ''
+    htmlfile = ''
     soup = ''
     
-    def __init__(self, pdfhtmlfile):
-        self.pdfhtmlfile = pdfhtmlfile
-        self.soup = BeautifulSoup(open(self.pdfhtmlfile), "html.parser")
+    def __init__(self, htmlfile):
+        self.logger = logger.Logger(logname= htmlfile +'.log', loglevel=1, logger=__name__).getlogger()
+        self.logger.info("Begin extract: %s" % htmlfile)
+        
+        self.htmlfile = htmlfile
+        self.soup = BeautifulSoup(open(self.htmlfile), "html.parser")
         
     def findSectionStartEndPage(self,sectionName):
+        
         pageRange = []
         startPage = ''
         endPage = ''
+        
+        if sectionName == None:
+            self.logger.error("sectionName is None")
+            return None
+        
+        self.logger.info("Begin find Page range of section: %s" % sectionName)
+        
         outline=self.soup.find_all('div',{'id':'outline'})
         print 'outline:',outline
         for li in outline:
@@ -35,6 +45,7 @@ class PdfHtmlExtractor(object):
         pageRange.append(startPage)
         pageRange.append(endPage)
         
+        self.logger.debug("sectionName = %s, startPage = %s, endPage = %s" % (sectionName, startPage, endPage))
         return pageRange
     
     def findPage(self,pageNum):
@@ -149,7 +160,7 @@ class PdfHtmlExtractor(object):
          
         
 if __name__ == '__main__':
-    pdfhtmlextact = PdfHtmlExtractor('2014.html')
+    pdfhtmlextact = PdfHtmlExtractor('../2014.html')
     pageRange = pdfhtmlextact.findSectionStartEndPage(u" 财务报告")
     print pageRange
     #pageRange = pdfhtmlextact.soup.find_all('div',{'id':pageRange[0]})

@@ -7,5 +7,6 @@
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
 <pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
 <path>C:\Python27\Lib\site-packages\beautifulsoup4-4.4.1-py2.7.egg</path>
+<path>C:\Python27\Lib</path>
 </pydev_pathproperty>
 </pydev_project>

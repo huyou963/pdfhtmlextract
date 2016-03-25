@@ -1,0 +1,15 @@
+2016-03-24 17:24:15,122 - fox - INFO - Begin extract: ../2014.html
+2016-03-24 17:45:24,003 - fox - INFO - Begin extract: ../2014.html
+2016-03-24 17:45:51,572 - __main__ - INFO - Begin extract: ../2014.html
+2016-03-24 17:59:07,673 - __main__ - INFO - Begin extract: ../2014.html
+2016-03-24 17:59:09,832 - __main__ - INFO - Begin find Page range of section:  财务报告
+2016-03-24 17:59:10,500 - __main__ - DEBUG - sectionName =  财务报告, startPage = pf39, endPage = pf91
+2016-03-24 18:02:17,928 - __init__ - INFO - Begin extract: ../2014.html
+2016-03-24 18:02:19,726 - findSectionStartEndPage - INFO - Begin find Page range of section:  财务报告
+2016-03-24 18:02:20,319 - findSectionStartEndPage - DEBUG - sectionName =  财务报告, startPage = pf39, endPage = pf91
+2016-03-24 18:04:32,681 - %(module) - s__init__ - INFO - Begin extract: ../2014.html
+2016-03-24 18:04:34,505 - %(module) - sfindSectionStartEndPage - INFO - Begin find Page range of section:  财务报告
+2016-03-24 18:04:35,114 - %(module) - sfindSectionStartEndPage - DEBUG - sectionName =  财务报告, startPage = pf39, endPage = pf91
+2016-03-24 18:05:12,184 - __init__- pdfhtmlextractor - __init__ - INFO - Begin extract: ../2014.html
+2016-03-24 18:05:13,944 - findSectionStartEndPage- pdfhtmlextractor - findSectionStartEndPage - INFO - Begin find Page range of section:  财务报告
+2016-03-24 18:05:14,565 - findSectionStartEndPage- pdfhtmlextractor - findSectionStartEndPage - DEBUG - sectionName =  财务报告, startPage = pf39, endPage = pf91

@@ -2,7 +2,6 @@
 __author__ = 'CQC'
 # -*- coding:utf-8 -*-
 
-import cell
 
 class Table(object):
     startPosition = ''
