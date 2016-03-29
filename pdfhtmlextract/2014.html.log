@@ -1,227 +1,52 @@
-2016-03-25 12:30:36,668 - pdfhtmlextractor - __init__ - 22 - INFO - Begin extract: ../2014.html
-2016-03-25 12:30:38,621 - pdfhtmlextractor - getSectionStartEndPage - 37 - INFO - Begin find Page range of section:  财务报告
-2016-03-25 12:30:39,285 - pdfhtmlextractor - getSectionStartEndPage - 51 - DEBUG - Page range is ( 财务报告, pf39, pf91)
-2016-03-25 12:30:39,836 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 期末余额 , pre-pageElement= 项目 , compareColumnElemnt= 项目 
-2016-03-25 12:30:39,836 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48c, pre-pageElement Y= y48c
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x2
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 期末余额 , pre-pageElement= 项目 , compareColumnElemnt= 项目 
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 期初余额 , pre-pageElement= 期末余额 , compareColumnElemnt= 项目 
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48c, pre-pageElement Y= y48c
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 期初余额 , pre-pageElement= 期末余额 , compareColumnElemnt= 项目 
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 流动资产： , pre-pageElement= 期初余额 , compareColumnElemnt= 项目 
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48d, pre-pageElement Y= y48c
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 流动资产： , pre-pageElement= 期初余额 , compareColumnElemnt= 项目 
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement= 流动资产： , compareColumnElemnt= 期末余额 
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48d, pre-pageElement Y= y48d
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,838 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement= 流动资产： , compareColumnElemnt= 期末余额 
-2016-03-25 12:30:39,839 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt= 期初余额 
-2016-03-25 12:30:39,839 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48d, pre-pageElement Y= y48d
-2016-03-25 12:30:39,839 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,839 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt= 期初余额 
-2016-03-25 12:30:39,839 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  货币资金 , pre-pageElement=  , compareColumnElemnt= 流动资产： 
-2016-03-25 12:30:39,839 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48e, pre-pageElement Y= y48d
-2016-03-25 12:30:39,839 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,839 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  货币资金 , pre-pageElement=  , compareColumnElemnt= 流动资产： 
-2016-03-25 12:30:39,839 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 220,414,035.52 , pre-pageElement=  货币资金 , compareColumnElemnt=  
-2016-03-25 12:30:39,841 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48e, pre-pageElement Y= y48e
-2016-03-25 12:30:39,841 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,841 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 220,414,035.52 , pre-pageElement=  货币资金 , compareColumnElemnt=  
-2016-03-25 12:30:39,841 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 34,225,627.50 , pre-pageElement= 220,414,035.52 , compareColumnElemnt=  
-2016-03-25 12:30:39,841 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48e, pre-pageElement Y= y48e
-2016-03-25 12:30:39,841 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,841 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 34,225,627.50 , pre-pageElement= 220,414,035.52 , compareColumnElemnt=  
-2016-03-25 12:30:39,841 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  结算备付金 , pre-pageElement= 34,225,627.50 , compareColumnElemnt=  货币资金 
-2016-03-25 12:30:39,841 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48f, pre-pageElement Y= y48e
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  结算备付金 , pre-pageElement= 34,225,627.50 , compareColumnElemnt=  货币资金 
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  结算备付金 , compareColumnElemnt= 220,414,035.52 
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48f, pre-pageElement Y= y48f
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  结算备付金 , compareColumnElemnt= 220,414,035.52 
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt= 34,225,627.50 
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y48f, pre-pageElement Y= y48f
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt= 34,225,627.50 
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  拆出资金 , pre-pageElement=  , compareColumnElemnt=  结算备付金 
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y490, pre-pageElement Y= y48f
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,842 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  拆出资金 , pre-pageElement=  , compareColumnElemnt=  结算备付金 
-2016-03-25 12:30:39,844 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  拆出资金 , compareColumnElemnt=  
-2016-03-25 12:30:39,844 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y490, pre-pageElement Y= y490
-2016-03-25 12:30:39,844 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,844 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  拆出资金 , compareColumnElemnt=  
-2016-03-25 12:30:39,844 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,844 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y490, pre-pageElement Y= y490
-2016-03-25 12:30:39,844 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,844 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  以公允价值计量且其变动计入当期损益的金融资产 , pre-pageElement=  , compareColumnElemnt=  拆出资金 
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y491, pre-pageElement Y= y490
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  以公允价值计量且其变动计入当期损益的金融资产 , pre-pageElement=  , compareColumnElemnt=  拆出资金 
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  以公允价值计量且其变动计入当期损益的金融资产 , compareColumnElemnt=  
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y491, pre-pageElement Y= y491
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  以公允价值计量且其变动计入当期损益的金融资产 , compareColumnElemnt=  
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y491, pre-pageElement Y= y491
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  衍生金融资产 , pre-pageElement=  , compareColumnElemnt=  以公允价值计量且其变动计入当期损益的金融资产 
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y492, pre-pageElement Y= y491
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  衍生金融资产 , pre-pageElement=  , compareColumnElemnt=  以公允价值计量且其变动计入当期损益的金融资产 
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  衍生金融资产 , compareColumnElemnt=  
-2016-03-25 12:30:39,845 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y492, pre-pageElement Y= y492
-2016-03-25 12:30:39,846 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,846 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  衍生金融资产 , compareColumnElemnt=  
-2016-03-25 12:30:39,846 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,846 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y492, pre-pageElement Y= y492
-2016-03-25 12:30:39,846 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,846 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,846 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  应收票据 , pre-pageElement=  , compareColumnElemnt=  衍生金融资产 
-2016-03-25 12:30:39,846 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y493, pre-pageElement Y= y492
-2016-03-25 12:30:39,846 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  应收票据 , pre-pageElement=  , compareColumnElemnt=  衍生金融资产 
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 4,320,047.86 , pre-pageElement=  应收票据 , compareColumnElemnt=  
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y493, pre-pageElement Y= y493
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 4,320,047.86 , pre-pageElement=  应收票据 , compareColumnElemnt=  
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 10,414,286.00 , pre-pageElement= 4,320,047.86 , compareColumnElemnt=  
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y493, pre-pageElement Y= y493
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 10,414,286.00 , pre-pageElement= 4,320,047.86 , compareColumnElemnt=  
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  应收账款 , pre-pageElement= 10,414,286.00 , compareColumnElemnt=  应收票据 
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y494, pre-pageElement Y= y493
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  应收账款 , pre-pageElement= 10,414,286.00 , compareColumnElemnt=  应收票据 
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 45,846,261.71 , pre-pageElement=  应收账款 , compareColumnElemnt= 4,320,047.86 
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y494, pre-pageElement Y= y494
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,848 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 45,846,261.71 , pre-pageElement=  应收账款 , compareColumnElemnt= 4,320,047.86 
-2016-03-25 12:30:39,849 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 39,037,110.88 , pre-pageElement= 45,846,261.71 , compareColumnElemnt= 10,414,286.00 
-2016-03-25 12:30:39,849 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y494, pre-pageElement Y= y494
-2016-03-25 12:30:39,849 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,849 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 39,037,110.88 , pre-pageElement= 45,846,261.71 , compareColumnElemnt= 10,414,286.00 
-2016-03-25 12:30:39,849 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  预付款项 , pre-pageElement= 39,037,110.88 , compareColumnElemnt=  应收账款 
-2016-03-25 12:30:39,849 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y495, pre-pageElement Y= y494
-2016-03-25 12:30:39,849 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,849 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  预付款项 , pre-pageElement= 39,037,110.88 , compareColumnElemnt=  应收账款 
-2016-03-25 12:30:39,849 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 1,430,284.71 , pre-pageElement=  预付款项 , compareColumnElemnt= 45,846,261.71 
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y495, pre-pageElement Y= y495
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 1,430,284.71 , pre-pageElement=  预付款项 , compareColumnElemnt= 45,846,261.71 
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 953,465.71 , pre-pageElement= 1,430,284.71 , compareColumnElemnt= 39,037,110.88 
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y495, pre-pageElement Y= y495
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 953,465.71 , pre-pageElement= 1,430,284.71 , compareColumnElemnt= 39,037,110.88 
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  应收保费 , pre-pageElement= 953,465.71 , compareColumnElemnt=  预付款项 
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y496, pre-pageElement Y= y495
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  应收保费 , pre-pageElement= 953,465.71 , compareColumnElemnt=  预付款项 
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  应收保费 , compareColumnElemnt= 1,430,284.71 
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y496, pre-pageElement Y= y496
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,851 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  应收保费 , compareColumnElemnt= 1,430,284.71 
-2016-03-25 12:30:39,852 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt= 953,465.71 
-2016-03-25 12:30:39,852 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y496, pre-pageElement Y= y496
-2016-03-25 12:30:39,852 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,852 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt= 953,465.71 
-2016-03-25 12:30:39,852 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  应收分保账款 , pre-pageElement=  , compareColumnElemnt=  应收保费 
-2016-03-25 12:30:39,852 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y497, pre-pageElement Y= y496
-2016-03-25 12:30:39,852 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,852 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  应收分保账款 , pre-pageElement=  , compareColumnElemnt=  应收保费 
-2016-03-25 12:30:39,854 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  应收分保账款 , compareColumnElemnt=  
-2016-03-25 12:30:39,854 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y497, pre-pageElement Y= y497
-2016-03-25 12:30:39,854 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,854 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  应收分保账款 , compareColumnElemnt=  
-2016-03-25 12:30:39,854 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,854 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y497, pre-pageElement Y= y497
-2016-03-25 12:30:39,854 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,854 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  应收分保合同准备金 , pre-pageElement=  , compareColumnElemnt=  应收分保账款 
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y498, pre-pageElement Y= y497
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  应收分保合同准备金 , pre-pageElement=  , compareColumnElemnt=  应收分保账款 
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  应收分保合同准备金 , compareColumnElemnt=  
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y498, pre-pageElement Y= y498
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  应收分保合同准备金 , compareColumnElemnt=  
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y498, pre-pageElement Y= y498
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  应收利息 , pre-pageElement=  , compareColumnElemnt=  应收分保合同准备金 
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y499, pre-pageElement Y= y498
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  应收利息 , pre-pageElement=  , compareColumnElemnt=  应收分保合同准备金 
-2016-03-25 12:30:39,855 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  应收利息 , compareColumnElemnt=  
-2016-03-25 12:30:39,857 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y499, pre-pageElement Y= y499
-2016-03-25 12:30:39,857 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,857 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  应收利息 , compareColumnElemnt=  
-2016-03-25 12:30:39,857 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,857 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y499, pre-pageElement Y= y499
-2016-03-25 12:30:39,857 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,857 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,857 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  应收股利 , pre-pageElement=  , compareColumnElemnt=  应收利息 
-2016-03-25 12:30:39,857 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49a, pre-pageElement Y= y499
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  应收股利 , pre-pageElement=  , compareColumnElemnt=  应收利息 
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  应收股利 , compareColumnElemnt=  
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49a, pre-pageElement Y= y49a
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  应收股利 , compareColumnElemnt=  
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49a, pre-pageElement Y= y49a
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt=  
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  其他应收款 , pre-pageElement=  , compareColumnElemnt=  应收股利 
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49b, pre-pageElement Y= y49a
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  其他应收款 , pre-pageElement=  , compareColumnElemnt=  应收股利 
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 3,048,434.31 , pre-pageElement=  其他应收款 , compareColumnElemnt=  
-2016-03-25 12:30:39,858 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49b, pre-pageElement Y= y49b
-2016-03-25 12:30:39,859 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,859 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 3,048,434.31 , pre-pageElement=  其他应收款 , compareColumnElemnt=  
-2016-03-25 12:30:39,859 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 5,581,247.23 , pre-pageElement= 3,048,434.31 , compareColumnElemnt=  
-2016-03-25 12:30:39,859 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49b, pre-pageElement Y= y49b
-2016-03-25 12:30:39,859 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 5,581,247.23 , pre-pageElement= 3,048,434.31 , compareColumnElemnt=  
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  买入返售金融资产 , pre-pageElement= 5,581,247.23 , compareColumnElemnt=  其他应收款 
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49c, pre-pageElement Y= y49b
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  买入返售金融资产 , pre-pageElement= 5,581,247.23 , compareColumnElemnt=  其他应收款 
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  买入返售金融资产 , compareColumnElemnt= 3,048,434.31 
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49c, pre-pageElement Y= y49c
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  买入返售金融资产 , compareColumnElemnt= 3,048,434.31 
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt= 5,581,247.23 
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49c, pre-pageElement Y= y49c
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt= 5,581,247.23 
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  存货 , pre-pageElement=  , compareColumnElemnt=  买入返售金融资产 
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49d, pre-pageElement Y= y49c
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  存货 , pre-pageElement=  , compareColumnElemnt=  买入返售金融资产 
-2016-03-25 12:30:39,861 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 67,141,394.81 , pre-pageElement=  存货 , compareColumnElemnt=  
-2016-03-25 12:30:39,862 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49d, pre-pageElement Y= y49d
-2016-03-25 12:30:39,862 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,862 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 67,141,394.81 , pre-pageElement=  存货 , compareColumnElemnt=  
-2016-03-25 12:30:39,862 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement= 43,966,222.94 , pre-pageElement= 67,141,394.81 , compareColumnElemnt=  
-2016-03-25 12:30:39,862 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49d, pre-pageElement Y= y49d
-2016-03-25 12:30:39,862 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,862 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement = 43,966,222.94 , pre-pageElement= 67,141,394.81 , compareColumnElemnt=  
-2016-03-25 12:30:39,862 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  划分为持有待售的资产 , pre-pageElement= 43,966,222.94 , compareColumnElemnt=  存货 
-2016-03-25 12:30:39,862 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49e, pre-pageElement Y= y49d
-2016-03-25 12:30:39,862 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-25 12:30:39,864 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  划分为持有待售的资产 , pre-pageElement= 43,966,222.94 , compareColumnElemnt=  存货 
-2016-03-25 12:30:39,864 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  划分为持有待售的资产 , compareColumnElemnt= 67,141,394.81 
-2016-03-25 12:30:39,864 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49e, pre-pageElement Y= y49e
-2016-03-25 12:30:39,864 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-25 12:30:39,864 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  划分为持有待售的资产 , compareColumnElemnt= 67,141,394.81 
-2016-03-25 12:30:39,865 - pdfhtmlextractor - getTableinPage - 101 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt= 43,966,222.94 
-2016-03-25 12:30:39,865 - pdfhtmlextractor - getTableinPage - 102 - DEBUG - pageElement Y= y49e, pre-pageElement Y= y49e
-2016-03-25 12:30:39,865 - pdfhtmlextractor - getTableinPage - 103 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-25 12:30:39,865 - pdfhtmlextractor - getTableinPage - 104 - DEBUG - pageElement =  , pre-pageElement=  , compareColumnElemnt= 43,966,222.94 
+2016-03-29 15:12:47,232 - pdfhtmlextractor - __init__ - 24 - INFO - Begin extract: ../2014.html
+2016-03-29 15:12:48,954 - pdfhtmlextractor - getSectionStartEndPage - 39 - INFO - Begin find Page range of section:  财务报告
+2016-03-29 15:12:49,523 - pdfhtmlextractor - getSectionStartEndPage - 53 - DEBUG - Page range is ( 财务报告, pf39, pf91)
+2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement= 期末余额 , pre-pageElement= 项目 , compareColumnElemnt= 项目 
+2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48c, pre-pageElement Y= y48c
+2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x13, compareColumnElemnt X= x2
+2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 118 - INFO - Find a table in page:pf3a, table start index:18
+2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 127 - DEBUG - Find 1st/2nd cell (rowIndex,columnIndex,value) (1,1,项目 ), (rowIndex,columnIndex,value) (1,2,期末余额 )
+2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement= 期初余额 , pre-pageElement= 期末余额 , compareColumnElemnt= 项目 
+2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48c, pre-pageElement Y= y48c
+2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= xb2, compareColumnElemnt X= x2
+2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 131 - DEBUG - Find other 1st row cell (rowIndex,columnIndex,value) (1,3,期初余额 )
+2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement= 流动资产： , pre-pageElement= 期初余额 , compareColumnElemnt= 项目 
+2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48d, pre-pageElement Y= y48c
+2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
+2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 145 - DEBUG - Find first column cell(rowIndex,columnIndex,value) (2,1,流动资产： )
+2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  , pre-pageElement= 流动资产： , compareColumnElemnt= 期末余额 
+2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48d, pre-pageElement Y= y48d
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (2,2, )
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt= 期初余额 
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48d, pre-pageElement Y= y48d
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (2,3, )
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  货币资金 , pre-pageElement=  , compareColumnElemnt= 流动资产： 
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48e, pre-pageElement Y= y48d
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 145 - DEBUG - Find first column cell(rowIndex,columnIndex,value) (3,1, 货币资金 )
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement= 220,414,035.52 , pre-pageElement=  货币资金 , compareColumnElemnt=  
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48e, pre-pageElement Y= y48e
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (3,2,220,414,035.52 )
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement= 34,225,627.50 , pre-pageElement= 220,414,035.52 , compareColumnElemnt=  
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48e, pre-pageElement Y= y48e
+2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
+2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (3,3,34,225,627.50 )
+2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  结算备付金 , pre-pageElement= 34,225,627.50 , compareColumnElemnt=  货币资金 
+2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48f, pre-pageElement Y= y48e
+2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
+2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 145 - DEBUG - Find first column cell(rowIndex,columnIndex,value) (4,1, 结算备付金 )
+2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  , pre-pageElement=  结算备付金 , compareColumnElemnt= 220,414,035.52 
+2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48f, pre-pageElement Y= y48f
+2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
+2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (4,2, )
+2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt= 34,225,627.50 
+2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48f, pre-pageElement Y= y48f
+2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
+2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (4,3, )
+2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  拆出资金 , pre-pageElement=  , compareColumnElemnt=  结算备付金 
+2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y490, pre-pageElement Y= y48f
+2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
+2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 145 - DEBUG - Find first column cell(rowIndex,columnIndex,value) (5,1, 拆出资金 )
