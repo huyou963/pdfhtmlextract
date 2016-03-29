@@ -20,7 +20,7 @@ class PdfHtmlExtractor(object):
         htmlfilelog = htmlfile + '.log'
         if os.path.exists(htmlfilelog):
             os.remove(htmlfilelog)
-        self.logger = Logger(logname=htmlfilelog, loglevel="DEBUG", logger=__name__).getlogger()
+        self.logger = Logger(logname=htmlfilelog, loglevel="INFO", logger=__name__).getlogger()
         self.logger.info("Begin extract: %s" % htmlfile)
         
         self.htmlfile = htmlfile
@@ -50,7 +50,7 @@ class PdfHtmlExtractor(object):
         pageRange.append(startPage)
         pageRange.append(endPage)
         
-        self.logger.debug("Page range is (%s, %s, %s)" % (sectionName, startPage, endPage))
+        self.logger.info("Page range is (%s, %s, %s)" % (sectionName, startPage, endPage))
         return pageRange
     
     def getPageContent(self,pageNum):
@@ -65,6 +65,45 @@ class PdfHtmlExtractor(object):
             self.logger.error("pageLen=", pageLen)            
         return None
 
+    def saveTable(self, tmpTable, rowNum, columnNum):
+        mytable = Table(rowNum,columnNum)
+        mytable.tableStartIndex = tmpTable.tableStartIndex
+        mytable.tableEndIndex = tmpTable.tableEndIndex
+        mytable.rowNum = rowNum
+        mytable.columnNum = columnNum
+        
+    def getPageTotalElementNum(self,pageNum):
+        pageElementNum = 0
+        
+        pageContent = self.getPageContent(pageNum)
+        if pageContent == None:
+            self.logger.error("Get page content None")
+            return None
+        pageElement = pageContent.div.div
+        
+        while True:
+            if None != pageElement:
+                pageElement =pageElement.next_sibling
+                pageElementNum += 1
+            else:
+                break
+        self.logger.info("Page:%s. Total element Num:%s" % (pageNum, pageElementNum))
+        return pageElementNum    
+     
+    def getCompareColumnElemnt(self, pageElement, columnNum):
+        if columnNum == 1:
+            compareColumnElemnt = pageElement.previous_sibling
+        if columnNum == 2:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling
+        if columnNum == 3:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling
+        if columnNum == 4:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        if columnNum == 5:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        if columnNum == 6:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        return compareColumnElemnt
     
     def getTablesinPage(self, pageNum):
         
@@ -74,9 +113,9 @@ class PdfHtmlExtractor(object):
             return None
         
         pageElement = pageContent.div.div
+        pageElementNum =  self.getPageTotalElementNum(pageNum)
         elementIndex = 0
-        totalElemet = 0
-        rowNum = 1            #保存有多少行
+        rowNum = 1            #保存有多少行 兼 rowIndex
         columnNum = 1         #保存有多少列
         columnIndex = 1       #记录列的序号
         tableStartIndex = 0   #保存table开始时的元素位置
@@ -89,18 +128,7 @@ class PdfHtmlExtractor(object):
                 if 'c' == pageElement['class'][0] and 'c' == pageElement.previous_sibling['class'][0]:
                     
                     #得到前列个元素
-                    if columnNum == 1:
-                        compareColumnElemnt = pageElement.previous_sibling
-                    if columnNum == 2:
-                        compareColumnElemnt = pageElement.previous_sibling.previous_sibling
-                    if columnNum == 3:
-                        compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling
-                    if columnNum == 4:
-                        compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling
-                    if columnNum == 5:
-                        compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
-                    if columnNum == 6:
-                        compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+                    compareColumnElemnt = self.getCompareColumnElemnt(pageElement, columnNum)
                     
                     self.logger.debug("pageElement= %s, pre-pageElement= %s, compareColumnElemnt= %s" % (pageElement.get_text(), pageElement.previous_sibling.get_text(), compareColumnElemnt.get_text()))                    
                     self.logger.debug("pageElement Y= %s, pre-pageElement Y= %s" % (pageElement['class'][2], pageElement.previous_sibling['class'][2]))
@@ -119,7 +147,7 @@ class PdfHtmlExtractor(object):
                                 
                                 # Save cur-cell, pre-cell, tableStartIndex
                                 tableSavedFlag = False
-                                tmpTable = Table(30,5) 
+                                tmpTable = Table(50,10) 
                                 tmpTable.tableStartIndex = tableStartIndex
                                 tmpTable.setCellValue(rowNum, columnIndex-1, pageElement.previous_sibling.get_text())
                                 tmpTable.setCellValue(rowNum, columnIndex, pageElement.get_text())
@@ -149,7 +177,7 @@ class PdfHtmlExtractor(object):
                             # 与前一个Y坐标不等，与前列个X坐标不等----table结束
                             if tableStartIndex != 0:
                                 tableEndIndex = elementIndex
-                                self.logger.info("Table is ended due to Y!=,X!= with info(rowNum,columnNum,tableEndIndex) (%s,%s,%s)" % (rowNum, columnIndex, tableEndIndex))
+                                self.logger.info("Table is ended due to Y!=,X!= with info(rowNum,columnNum,tableEndIndex,content) (%s,%s,%s,%s)" % (rowNum, columnIndex, tableEndIndex, pageElement.get_text()))
                                 #Save tableEndIndex, rowNum, columnNum append tableList
                                 if tableSavedFlag == False:
                                     tmpTable.tableEndIndex = tableEndIndex
@@ -157,6 +185,12 @@ class PdfHtmlExtractor(object):
                                     tmpTable.columnNum = columnNum
                                     self.tableList.append(tmpTable)
                                     tableSavedFlag = True
+                                # 结束表清空tmptable相关变量
+                                tableStartIndex = 0
+                                rowNum = 1
+                                columnNum = 1
+                                columnIndex = 1
+                                tableEndIndex = 0    
                                 
                 elif 't' == pageElement['class'][0]:
                     if tableStartIndex != 0:
@@ -169,24 +203,39 @@ class PdfHtmlExtractor(object):
                             tmpTable.columnNum = columnNum
                             self.tableList.append(tmpTable)
                             tableSavedFlag = True
-                                        
+                        # 结束表清空tmptable相关变量
+                        tableStartIndex = 0
+                        rowNum = 1
+                        columnNum = 1
+                        columnIndex = 1
+                        tableEndIndex = 0   
+            #检索完最后一个元素，跳出死循环
             else:
                 if tableStartIndex != 0:
                     tableEndIndex = elementIndex
-                    self.logger.info("Page %s with elementNum %s fetch end" % (pageNum, elementIndex))
+                    self.logger.info("Table is ended due to last element info(rowNum,columnNum,tableEndIndex) (%s,%s,%s)" % (rowNum, columnIndex, tableEndIndex))
+                    if tableSavedFlag == False:
+                        tmpTable.tableEndIndex = tableEndIndex
+                        tmpTable.rowNum = rowNum
+                        tmpTable.columnNum = columnNum
+                        self.tableList.append(tmpTable)
+                        tableSavedFlag = True
+                    self.logger.info("Page %s fetch end" % pageNum)
+                    # 结束表清空tmptable相关变量
+                    tableStartIndex = 0
+                    rowNum = 1
+                    columnNum = 1
+                    columnIndex = 1
+                    tableEndIndex = 0   
                 break
+            
+            # 获取下一个元素
             pageElement =pageElement.next_sibling
             elementIndex += 1
-        pageTotalElemet = elementIndex
          
         
 if __name__ == '__main__':
     pdfhtmlextact = PdfHtmlExtractor('../2014.html')
     pageRange = pdfhtmlextact.getSectionStartEndPage(u" 财务报告")
 
-    #pageRange = pdfhtmlextact.soup.find_all('div',{'id':pageRange[0]})
-    #if 1 < len(pagelist):
-       #print "WRN there has more than one same page", pageRange[0] 
-    #for page in pagelist:
-        #page.next_sibling
-    tableinpage = pdfhtmlextact.getTablesinPage('pf3a')
+    tableinpage = pdfhtmlextact.getTablesinPage('pf3d')

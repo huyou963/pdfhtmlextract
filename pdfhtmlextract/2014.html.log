@@ -1,52 +1,9 @@
-2016-03-29 15:12:47,232 - pdfhtmlextractor - __init__ - 24 - INFO - Begin extract: ../2014.html
-2016-03-29 15:12:48,954 - pdfhtmlextractor - getSectionStartEndPage - 39 - INFO - Begin find Page range of section:  财务报告
-2016-03-29 15:12:49,523 - pdfhtmlextractor - getSectionStartEndPage - 53 - DEBUG - Page range is ( 财务报告, pf39, pf91)
-2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement= 期末余额 , pre-pageElement= 项目 , compareColumnElemnt= 项目 
-2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48c, pre-pageElement Y= y48c
-2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x13, compareColumnElemnt X= x2
-2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 118 - INFO - Find a table in page:pf3a, table start index:18
-2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 127 - DEBUG - Find 1st/2nd cell (rowIndex,columnIndex,value) (1,1,项目 ), (rowIndex,columnIndex,value) (1,2,期末余额 )
-2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement= 期初余额 , pre-pageElement= 期末余额 , compareColumnElemnt= 项目 
-2016-03-29 15:12:50,072 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48c, pre-pageElement Y= y48c
-2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= xb2, compareColumnElemnt X= x2
-2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 131 - DEBUG - Find other 1st row cell (rowIndex,columnIndex,value) (1,3,期初余额 )
-2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement= 流动资产： , pre-pageElement= 期初余额 , compareColumnElemnt= 项目 
-2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48d, pre-pageElement Y= y48c
-2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 145 - DEBUG - Find first column cell(rowIndex,columnIndex,value) (2,1,流动资产： )
-2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  , pre-pageElement= 流动资产： , compareColumnElemnt= 期末余额 
-2016-03-29 15:12:50,073 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48d, pre-pageElement Y= y48d
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (2,2, )
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt= 期初余额 
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48d, pre-pageElement Y= y48d
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (2,3, )
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  货币资金 , pre-pageElement=  , compareColumnElemnt= 流动资产： 
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48e, pre-pageElement Y= y48d
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 145 - DEBUG - Find first column cell(rowIndex,columnIndex,value) (3,1, 货币资金 )
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement= 220,414,035.52 , pre-pageElement=  货币资金 , compareColumnElemnt=  
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48e, pre-pageElement Y= y48e
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (3,2,220,414,035.52 )
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement= 34,225,627.50 , pre-pageElement= 220,414,035.52 , compareColumnElemnt=  
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48e, pre-pageElement Y= y48e
-2016-03-29 15:12:50,075 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (3,3,34,225,627.50 )
-2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  结算备付金 , pre-pageElement= 34,225,627.50 , compareColumnElemnt=  货币资金 
-2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48f, pre-pageElement Y= y48e
-2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 145 - DEBUG - Find first column cell(rowIndex,columnIndex,value) (4,1, 结算备付金 )
-2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  , pre-pageElement=  结算备付金 , compareColumnElemnt= 220,414,035.52 
-2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48f, pre-pageElement Y= y48f
-2016-03-29 15:12:50,076 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x13, compareColumnElemnt X= x13
-2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (4,2, )
-2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  , pre-pageElement=  , compareColumnElemnt= 34,225,627.50 
-2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y48f, pre-pageElement Y= y48f
-2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= xb2, compareColumnElemnt X= xb2
-2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 136 - DEBUG - Find Cell row>1,column>1 (rowIndex,columnIndex,value) (4,3, )
-2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 105 - DEBUG - pageElement=  拆出资金 , pre-pageElement=  , compareColumnElemnt=  结算备付金 
-2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 106 - DEBUG - pageElement Y= y490, pre-pageElement Y= y48f
-2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 107 - DEBUG - pageElement X= x2, compareColumnElemnt X= x2
-2016-03-29 15:12:50,078 - pdfhtmlextractor - getTablesinPage - 145 - DEBUG - Find first column cell(rowIndex,columnIndex,value) (5,1, 拆出资金 )
+2016-03-29 22:40:43,242 - pdfhtmlextractor - __init__ - 24 - INFO - Begin extract: ../2014.html
+2016-03-29 22:40:46,362 - pdfhtmlextractor - getSectionStartEndPage - 39 - INFO - Begin find Page range of section:  财务报告
+2016-03-29 22:40:47,339 - pdfhtmlextractor - getSectionStartEndPage - 53 - INFO - Page range is ( 财务报告, pf39, pf91)
+2016-03-29 22:40:49,230 - pdfhtmlextractor - getPageTotalElementNum - 90 - INFO - Page:pf3d. Total element Num:93
+2016-03-29 22:40:49,230 - pdfhtmlextractor - getTablesinPage - 146 - INFO - Find a table in page:pf3d, table start index:4
+2016-03-29 22:40:49,239 - pdfhtmlextractor - getTablesinPage - 198 - INFO - Table is ended due to find a class t info(rowNum,columnNum,tableEndIndex) (12,3,39)
+2016-03-29 22:40:49,240 - pdfhtmlextractor - getTablesinPage - 146 - INFO - Find a table in page:pf3d, table start index:43
+2016-03-29 22:40:49,252 - pdfhtmlextractor - getTablesinPage - 216 - INFO - Table is ended due to last element info(rowNum,columnNum,tableEndIndex) (17,3,93)
+2016-03-29 22:40:49,252 - pdfhtmlextractor - getTablesinPage - 223 - INFO - Page pf3d fetch end
