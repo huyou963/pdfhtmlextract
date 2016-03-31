@@ -1,22 +1,2 @@
-2016-03-31 19:02:46,670 - pdfhtmlextractor - __init__ - 24 - INFO - Begin extract: ../2014.html
-2016-03-31 19:02:48,492 - pdfhtmlextractor - getSectionStartEndPage - 39 - INFO - Begin find Page range of section:  财务报告
-2016-03-31 19:02:49,071 - pdfhtmlextractor - getSectionStartEndPage - 53 - INFO - Page range is ( 财务报告, pf39, pf91)
-2016-03-31 19:02:50,173 - pdfhtmlextractor - getPageTotalElementNum - 112 - INFO - Page:pf47. Total element Num:230
-2016-03-31 19:02:50,176 - pdfhtmlextractor - getTablesinPage - 182 - INFO - Find a table in page:pf47, table start index:7
-2016-03-31 19:02:50,177 - pdfhtmlextractor - getTablesinPage - 216 - INFO - Table is ended due to Y!=,X!= with info(rowNum,columnNum,tableEndIndex,content) (1,3,9,其他权益工具 )
-2016-03-31 19:02:50,177 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 0,  ,)
-2016-03-31 19:02:50,177 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 1,  ,)
-2016-03-31 19:02:50,177 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 2,  ,)
-2016-03-31 19:02:50,184 - pdfhtmlextractor - getTablesinPage - 182 - INFO - Find a table in page:pf47, table start index:11
-2016-03-31 19:02:50,187 - pdfhtmlextractor - getTablesinPage - 216 - INFO - Table is ended due to Y!=,X!= with info(rowNum,columnNum,tableEndIndex,content) (1,10,20,一、上年期末余额 )
-2016-03-31 19:02:50,187 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 0,  ,)
-2016-03-31 19:02:50,187 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 1,  ,)
-2016-03-31 19:02:50,187 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 2,  ,)
-2016-03-31 19:02:50,187 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 3,  ,)
-2016-03-31 19:02:50,187 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 4,  ,)
-2016-03-31 19:02:50,187 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 5,  ,)
-2016-03-31 19:02:50,187 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 6,  ,)
-2016-03-31 19:02:50,187 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 7,  ,)
-2016-03-31 19:02:50,187 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 8,  ,)
-2016-03-31 19:02:50,187 - pdfhtmlextractor - saveTable - 90 - INFO - Save cell (row, column, tmpTablevalue, myTablevalue) (0, 9,  ,)
-2016-03-31 19:02:50,194 - pdfhtmlextractor - getTablesinPage - 182 - INFO - Find a table in page:pf47, table start index:21
+2016-03-31 23:18:36,460 - pdfhtmlextractor - __init__ - 24 - INFO - Begin extract: ../2014.html
+2016-03-31 23:18:39,660 - pdfhtmlextractor - getSectionStartEndPage - 39 - INFO - Begin find Page range of section:  财务报告
