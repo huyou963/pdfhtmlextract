@@ -13,7 +13,7 @@ from logger import Logger
 class PdfHtmlExtractor(object):
     htmlfile = ''
     soup = ''
-    tableList = []
+    tableList = []   #保存每页中找到的
     
     def __init__(self, htmlfile):
         
@@ -65,12 +65,34 @@ class PdfHtmlExtractor(object):
             self.logger.error("pageLen=", pageLen)            
         return None
 
-    def saveTable(self, tmpTable, rowNum, columnNum):
-        mytable = Table(rowNum,columnNum)
-        mytable.tableStartIndex = tmpTable.tableStartIndex
-        mytable.tableEndIndex = tmpTable.tableEndIndex
-        mytable.rowNum = rowNum
-        mytable.columnNum = columnNum
+    def saveTable(self, tmpTable, rowNum, columnNum, pageElementNum):
+        myTable = Table(rowNum,columnNum)
+        myTable.tableStartIndex = tmpTable.tableStartIndex
+        myTable.tableEndIndex = tmpTable.tableEndIndex
+        myTable.rowNum = rowNum
+        myTable.columnNum = columnNum
+        myTable.pageNum = tmpTable.pageNum
+        
+        #判断是否有前后续表
+        if tmpTable.tableStartIndex < 5:
+            myTable.preExtend = 1
+        else:
+            myTable.preExtend = 0
+        if (pageElementNum - tmpTable.tableEndIndex) < 5:
+            myTable.aftExtend = 1
+        else:
+            myTable.aftExtend = 0
+            
+        #保存表格内容
+        for row in range(0,rowNum):
+            for column in range(0,columnNum):
+                myTable.setCellValue(row, column, tmpTable.getCellValue(row,column))
+                self.logger.info("Save cell (row, column, tmpTablevalue, myTablevalue) (%s, %s, %s ,%s)" % (row, column, tmpTable.getCellValue(row,column), myTable.getCellValue(row, column)))
+                 
+        self.tableList.append(myTable)
+        print "tmp",tmpTable.cellArray
+        print "!!!",myTable.cellArray
+        return
         
     def getPageTotalElementNum(self,pageNum):
         pageElementNum = 0
@@ -103,6 +125,18 @@ class PdfHtmlExtractor(object):
             compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         if columnNum == 6:
             compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        if columnNum == 7:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        if columnNum == 8:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        if columnNum == 9:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        if columnNum == 10:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        if columnNum == 11:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        if columnNum == 12:
+            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         return compareColumnElemnt
     
     def getTablesinPage(self, pageNum):
@@ -115,6 +149,8 @@ class PdfHtmlExtractor(object):
         pageElement = pageContent.div.div
         pageElementNum =  self.getPageTotalElementNum(pageNum)
         elementIndex = 0
+        
+        #table信息相关临时标量
         rowNum = 1            #保存有多少行 兼 rowIndex
         columnNum = 1         #保存有多少列
         columnIndex = 1       #记录列的序号
@@ -126,7 +162,7 @@ class PdfHtmlExtractor(object):
                 
                 #找到连续class C，判断是不是table开始
                 if 'c' == pageElement['class'][0] and 'c' == pageElement.previous_sibling['class'][0]:
-                    
+                    tmpTable = Table(50,20)
                     #得到前列个元素
                     compareColumnElemnt = self.getCompareColumnElemnt(pageElement, columnNum)
                     
@@ -147,20 +183,20 @@ class PdfHtmlExtractor(object):
                                 
                                 # Save cur-cell, pre-cell, tableStartIndex
                                 tableSavedFlag = False
-                                tmpTable = Table(50,10) 
+                                 
                                 tmpTable.tableStartIndex = tableStartIndex
-                                tmpTable.setCellValue(rowNum, columnIndex-1, pageElement.previous_sibling.get_text())
-                                tmpTable.setCellValue(rowNum, columnIndex, pageElement.get_text())
+                                tmpTable.setCellValue(rowNum-1, columnIndex-2, pageElement.previous_sibling.get_text())
+                                tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())
                                
                                 self.logger.debug("Find 1st/2nd cell (rowIndex,columnIndex,value) (%s,%s,%s), (rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex-1,pageElement.previous_sibling.get_text(),rowNum, columnIndex,pageElement.get_text()))
                             #找到第一行其他cell
                             else:
-                                tmpTable.setCellValue(rowNum, columnIndex, pageElement.get_text())
+                                tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())
                                 self.logger.debug("Find other 1st row cell (rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex,pageElement.get_text()))
                                 # Save cur-cell
                         #与前一个元素的Y等，与前列个元素的 X相等----除第一行第一列以外的元素        
                         else:
-                            tmpTable.setCellValue(rowNum, columnIndex, pageElement.get_text())
+                            tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())
                             self.logger.debug("Find Cell row>1,column>1 (rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex,pageElement.get_text()))
                             
                     else:
@@ -171,7 +207,7 @@ class PdfHtmlExtractor(object):
                                 columnNum = columnIndex
                                 columnIndex = 1
                             self.logger.debug("Find first column cell(rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex, pageElement.get_text()))
-                            tmpTable.setCellValue(rowNum, columnIndex, pageElement.get_text())                            
+                            tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())                            
                            
                         else:
                             # 与前一个Y坐标不等，与前列个X坐标不等----table结束
@@ -183,7 +219,7 @@ class PdfHtmlExtractor(object):
                                     tmpTable.tableEndIndex = tableEndIndex
                                     tmpTable.rowNum = rowNum
                                     tmpTable.columnNum = columnNum
-                                    self.tableList.append(tmpTable)
+                                    self.saveTable(tmpTable,rowNum,columnNum,pageElementNum)
                                     tableSavedFlag = True
                                 # 结束表清空tmptable相关变量
                                 tableStartIndex = 0
@@ -201,7 +237,7 @@ class PdfHtmlExtractor(object):
                             tmpTable.tableEndIndex = tableEndIndex
                             tmpTable.rowNum = rowNum
                             tmpTable.columnNum = columnNum
-                            self.tableList.append(tmpTable)
+                            self.saveTable(tmpTable,rowNum,columnNum,pageElementNum)
                             tableSavedFlag = True
                         # 结束表清空tmptable相关变量
                         tableStartIndex = 0
@@ -214,11 +250,12 @@ class PdfHtmlExtractor(object):
                 if tableStartIndex != 0:
                     tableEndIndex = elementIndex
                     self.logger.info("Table is ended due to last element info(rowNum,columnNum,tableEndIndex) (%s,%s,%s)" % (rowNum, columnIndex, tableEndIndex))
+                    #Save tableEndIndex, rowNum, columnNum
                     if tableSavedFlag == False:
                         tmpTable.tableEndIndex = tableEndIndex
                         tmpTable.rowNum = rowNum
                         tmpTable.columnNum = columnNum
-                        self.tableList.append(tmpTable)
+                        self.saveTable(tmpTable,rowNum,columnNum,pageElementNum)
                         tableSavedFlag = True
                     self.logger.info("Page %s fetch end" % pageNum)
                     # 结束表清空tmptable相关变量
@@ -232,10 +269,9 @@ class PdfHtmlExtractor(object):
             # 获取下一个元素
             pageElement =pageElement.next_sibling
             elementIndex += 1
-         
         
 if __name__ == '__main__':
     pdfhtmlextact = PdfHtmlExtractor('../2014.html')
     pageRange = pdfhtmlextact.getSectionStartEndPage(u" 财务报告")
 
-    tableinpage = pdfhtmlextact.getTablesinPage('pf3d')
+    tableinpage = pdfhtmlextact.getTablesinPage('pf47')

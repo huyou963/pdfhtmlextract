@@ -10,8 +10,8 @@ class Table(object):
     tableEndIndex = 0
     rowNum = 0
     columnNum = 0
-    preExtend = 2
-    aftExtend = 2
+    preExtend = 2    #0：没有前续表。 1：有前续表。 2：初始值
+    aftExtend = 2    #0：没有后续表。 1：有后续表。 2：初始值
     cellArray = []
      
     def __init__(self, rowNum, columnNum):
