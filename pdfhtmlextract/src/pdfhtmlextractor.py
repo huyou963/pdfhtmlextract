@@ -38,32 +38,33 @@ class PdfHtmlExtractor(object):
         
         self.logger.info("Begin find Page range of section: %s" % sectionName)
         
+        #Find section start/end page from catalogue
         outline=self.soup.find_all('div',{'id':'outline'})
-
         for li in outline:
             li_list = li.find_all('li')
             for li in li_list:
                 if re.search(sectionName, li.a.get_text()):
-                    startPage = li.a['href'][1:]
-                    endPage = li.next_sibling.a['href'][1:]
+                    secondLiList = li.find_all('li')
+                    for secondLi in secondLiList:
+                        regex = u"财务报表"
+                        if re.search(regex, secondLi.a.get_text()):
+                            print "secondLi",secondLi.encode('utf-8')
+                            startPage = secondLi.a['href'][1:]
+                            endPage = secondLi.next_sibling.a['href'][1:]
         
-        PageContainer = self.soup.find_all('div',{'id':'page-container'})
+        #Get page list between start/end
+        pagesContainer=self.soup.find_all('div',id=re.compile("pf"))
+        startParse=0
+        for page in pagesContainer:
+            if(page['id']==startPage):
+                startParse=1
+            elif (page['id']==endPage):
+                startParse=0
+                exit
+            if(startParse==1):
+                pageList.append(page['id'])
         
-        if PageContainer[0].div['id'] == startPage:
-            
-        nextPageContent = startPageContent[0]
-        print nextPageContent['id'], nextPageContent.next_sibling['id']
-        nextPage = nextPageContent['id']
-        
-        while nextPage != endPage and nextPageContent != None:
-            print "!!",nextPageContent['id']
-            pageList.append(nextPageContent['id'])
-            nextPageContent = nextPageContent.next_sibling
-            nextPage = nextPageContent['id']
-            
-        print "pageList is:",pageList
-        
-        self.logger.info("Scetion:%s, Page list is: %s" % (sectionName, pageList))
+        self.logger.info("Section:%s, Page list is: %s" % (sectionName, pageList))
         
         return pageList
     
