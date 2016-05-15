@@ -9,11 +9,15 @@ from bs4 import BeautifulSoup
 import re
 from table import Table
 from logger import Logger
+import string
 
 class PdfHtmlExtractor(object):
     htmlfile = ''
     soup = ''
     tableList = []   #保存每页中找到的
+    table1=[0,0]
+    table2=[0,0]
+    table3=[0,0]
     
     def __init__(self, htmlfile):
         
@@ -287,7 +291,56 @@ class PdfHtmlExtractor(object):
             elementIndex += 1
         
         return True
+    
+    def getOutLine(self):
+        outlines=self.soup.find_all('div',{'id':'outline'})
+        outlineIndex = 0
+        times = 0
+        for outline in outlines:
+            if outlineIndex > 1:
+                print "Find more than one outline"
+                return
+            for child in outline.children:
+                self.processNode(child, times)
+            #print "len(outline)!!!outline.contents", len(outline.contents), outline.contents
+            outlineIndex += 1
+        print "start-end:",self.table1[0],self.table1[1] ,self.table2[0],self.table2[1],self.table3[0],self.table3[1]
         
+    def processNode(self, node, times):
+        
+        if node.name == "a":
+            print "string a",node.string, "times:", times, "href:",string.atoi(node['href'][3:],base=16)
+        if node.name == "li":
+            for child in node.children:
+                if child.name == "a":
+                    strTable1 = u"合并资产负债表"
+                    strTable2 = u"合并利润表"
+                    strTable3 = u"合并现金流量表"
+                    pageNum=string.atoi(child['href'][3:],base=16)
+                    if re.search(strTable1, child.string):
+                        self.table1[0]=pageNum
+                    elif 0!=self.table1[0] and 0==self.table1[1]:
+                        self.table1[1]=pageNum
+                    
+                    if re.search(strTable2, child.string):
+                        self.table2[0]=pageNum
+                    elif 0!=self.table2[0] and 0==self.table2[1]:
+                        self.table2[1]=pageNum
+                        
+                    if re.search(strTable3, child.string):
+                        self.table3[0]=pageNum
+                    elif 0!=self.table3[0] and 0==self.table3[1]:
+                        self.table3[1]=pageNum
+                        
+                    print "string li.a",child.string, "times:", times, "href:",string.atoi(child['href'][3:],base=16)
+                if child.name == "ul":
+                    self.processNode(child,times)
+        if node.name == "ul":
+            times += 1
+            for child in node.children:
+                self.processNode(child,times)
+                
+    
 if __name__ == '__main__':
     pdfhtmlextact = PdfHtmlExtractor('../2014.html')
     pageList = pdfhtmlextact.getSectionStartEndPage(u" 财务报告")
