@@ -18,7 +18,10 @@ class PdfHtmlExtractor(object):
     pageRange1=[0,0]     #save table page range
     pageRange2=[0,0]
     pageRange3=[0,0]
-    
+    paragraphPageList1 = []
+    paragraphPageList2 = []
+    paragraphPageList3 = []
+     
     def __init__(self, htmlfile):
         
         htmlfilelog = htmlfile + '.log'
@@ -91,6 +94,7 @@ class PdfHtmlExtractor(object):
         myTable.columnNum = columnNum
         myTable.pageNum = tmpTable.pageNum
         
+        print "!!",tmpTable.tableEndIndex,tmpTable.tableStartIndex
         #判断是否有前后续表
         if tmpTable.tableStartIndex < 5:
             myTable.preExtend = 1
@@ -110,9 +114,10 @@ class PdfHtmlExtractor(object):
         self.tableList.append(myTable)
 
         return
-        
-    def getPageTotalElementNum(self,pageNum):
-        pageElementNum = 0
+    
+    #cmpStr==None return total num of page element, cmpStr!=None return cmpStr position in page    
+    def getPageElementIndexOrTotalNum(self,pageNum,cmpStr=None):
+        pageElementIndex = 0
         
         pageContent = self.getPageContent(pageNum)
         if pageContent == None:
@@ -122,13 +127,21 @@ class PdfHtmlExtractor(object):
         
         while True:
             if None != pageElement:
+                if cmpStr!= None:
+                    if re.search(cmpStr, pageElement.get_text()):
+                        self.logger.info("Find (cmpStr,Page,ElementIndex) (%s, %s, %s)" % (cmpStr, pageNum, pageElementIndex))
+                        return pageElementIndex
                 pageElement =pageElement.next_sibling
-                pageElementNum += 1
+                pageElementIndex += 1
             else:
                 break
-        self.logger.info("Page:%s. Total element Num:%s" % (pageNum, pageElementNum))
-        return pageElementNum    
-     
+        if cmpStr == None:
+            self.logger.info("Page:%s. Total element Num:%s" % (pageNum, pageElementIndex))
+            return pageElementIndex
+        else:
+            self.logger.error("Cann't find str:%s in page:%s" % (cmpStr,pageNum))    
+            return None
+        
     def getCompareColumnElemnt(self, pageElement, columnNum):
         if columnNum == 1:
             compareColumnElemnt = pageElement.previous_sibling
@@ -156,15 +169,16 @@ class PdfHtmlExtractor(object):
             compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         return compareColumnElemnt
     
-    def getTablesinPage(self, pageNum):
+    def getTablesinPage(self, pageNum, startElementIndex=0, endElementIndex=65535):
         
+        print "getTableInPage:", startElementIndex, endElementIndex
         pageContent = self.getPageContent(pageNum)
         if pageContent == None:
             self.logger.error("Get page content None")
             return None
         
         pageElement = pageContent.div.div
-        pageElementNum =  self.getPageTotalElementNum(pageNum)
+        pageElementNum =  self.getPageElementIndexOrTotalNum(pageNum)
         elementIndex = 0
         
         #table信息相关临时标量
@@ -173,83 +187,103 @@ class PdfHtmlExtractor(object):
         columnIndex = 1       #记录列的序号
         tableStartIndex = 0   #保存table开始时的元素位置
         tableEndIndex = 0     #保存table结束时的元素位置
-        
+        tmpTable = None
         while True:
-            if None != pageElement:
-                
-                #找到连续class C，判断是不是table开始
-                if 'c' == pageElement['class'][0] and 'c' == pageElement.previous_sibling['class'][0]:
-                    tmpTable = Table(50,20)
-                    #得到前列个元素
-                    compareColumnElemnt = self.getCompareColumnElemnt(pageElement, columnNum)
-                    
-                    self.logger.debug("pageElement= %s, pre-pageElement= %s, compareColumnElemnt= %s" % (pageElement.get_text(), pageElement.previous_sibling.get_text(), compareColumnElemnt.get_text()))                    
-                    self.logger.debug("pageElement Y= %s, pre-pageElement Y= %s" % (pageElement['class'][2], pageElement.previous_sibling['class'][2]))
-                    self.logger.debug("pageElement X= %s, compareColumnElemnt X= %s" % (pageElement['class'][1], compareColumnElemnt['class'][1]))
-
-                    # 与前一个元素的Y坐标比较
-                    if pageElement.previous_sibling['class'][2] == pageElement['class'][2]:    
-                        columnIndex += 1
-                        #与前一个元素的Y等，与前列个元素的 X不等 ----第一行元素
-                        if pageElement['class'][1] != compareColumnElemnt['class'][1]:
-                            columnNum = columnIndex
-                            # 如果table没开始，则找到第一个1/2cell
-                            if tableStartIndex == 0:
-                                tableStartIndex = elementIndex
-                                self.logger.info("Find a table in page:%s, table start index:%s" % (pageNum, tableStartIndex))
-                                
-                                # Save cur-cell, pre-cell, tableStartIndex
-                                tableSavedFlag = False
-                                 
-                                tmpTable.tableStartIndex = tableStartIndex
-                                tmpTable.setCellValue(rowNum-1, columnIndex-2, pageElement.previous_sibling.get_text())
-                                tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())
-                               
-                                self.logger.debug("Find 1st/2nd cell (rowIndex,columnIndex,value) (%s,%s,%s), (rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex-1,pageElement.previous_sibling.get_text(),rowNum, columnIndex,pageElement.get_text()))
-                            #找到第一行其他cell
+            if elementIndex >= startElementIndex:
+                if (None != pageElement and elementIndex <= endElementIndex):
+                    #找到连续class C，判断是不是table开始
+                    if 'c' == pageElement['class'][0] and 'c' == pageElement.previous_sibling['class'][0]:
+                        if tmpTable == None:
+                            tmpTable = Table(50,20)
+                        #得到前列个元素
+                        compareColumnElemnt = self.getCompareColumnElemnt(pageElement, columnNum)
+                        
+                        self.logger.debug("pageElement= %s, pre-pageElement= %s, compareColumnElemnt= %s" % (pageElement.get_text(), pageElement.previous_sibling.get_text(), compareColumnElemnt.get_text()))                    
+                        self.logger.debug("pageElement Y= %s, pre-pageElement Y= %s" % (pageElement['class'][2], pageElement.previous_sibling['class'][2]))
+                        self.logger.debug("pageElement X= %s, compareColumnElemnt X= %s" % (pageElement['class'][1], compareColumnElemnt['class'][1]))
+    
+                        # 与前一个元素的Y坐标比较
+                        if pageElement.previous_sibling['class'][2] == pageElement['class'][2]:    
+                            columnIndex += 1
+                            #与前一个元素的Y等，与前列个元素的 X不等 ----第一行元素
+                            if pageElement['class'][1] != compareColumnElemnt['class'][1]:
+                                columnNum = columnIndex
+                                # 如果table没开始，则找到第一个1/2cell
+                                if tableStartIndex == 0:
+                                    tableStartIndex = elementIndex
+                                    self.logger.info("Find a table in page:%s, table start index:%s" % (pageNum, tableStartIndex))
+                                    
+                                    # Save cur-cell, pre-cell, tableStartIndex
+                                    tableSavedFlag = False
+                                     
+                                    tmpTable.tableStartIndex = tableStartIndex
+                                    tmpTable.setCellValue(rowNum-1, columnIndex-2, pageElement.previous_sibling.get_text())
+                                    tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())
+                                   
+                                    self.logger.debug("Find 1st/2nd cell (rowIndex,columnIndex,value) (%s,%s,%s), (rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex-1,pageElement.previous_sibling.get_text(),rowNum, columnIndex,pageElement.get_text()))
+                                #找到第一行其他cell
+                                else:
+                                    tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())
+                                    self.logger.debug("Find other 1st row cell (rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex,pageElement.get_text()))
+                                    # Save cur-cell
+                            #与前一个元素的Y等，与前列个元素的 X相等----除第一行第一列以外的元素        
                             else:
                                 tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())
-                                self.logger.debug("Find other 1st row cell (rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex,pageElement.get_text()))
-                                # Save cur-cell
-                        #与前一个元素的Y等，与前列个元素的 X相等----除第一行第一列以外的元素        
-                        else:
-                            tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())
-                            self.logger.debug("Find Cell row>1,column>1 (rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex,pageElement.get_text()))
-                            
-                    else:
-                        #与前一个元素的Y不等，与前列个元素的X相等----除(1,1)以外的第一列元素
-                        if pageElement['class'][1] == compareColumnElemnt['class'][1]:
-                            if tableStartIndex != 0:
-                                rowNum += 1
-                                columnNum = columnIndex
-                                columnIndex = 1
-                            self.logger.debug("Find first column cell(rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex, pageElement.get_text()))
-                            tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())                            
-                           
-                        else:
-                            # 与前一个Y坐标不等，与前列个X坐标不等----table结束
-                            if tableStartIndex != 0:
-                                tableEndIndex = elementIndex
-                                self.logger.info("Table is ended due to Y!=,X!= with info(rowNum,columnNum,tableEndIndex,content) (%s,%s,%s,%s)" % (rowNum, columnIndex, tableEndIndex, pageElement.get_text()))
-                                #Save tableEndIndex, rowNum, columnNum append tableList
-                                if tableSavedFlag == False and rowNum >= 1 and columnNum > 1:
-                                    tmpTable.tableEndIndex = tableEndIndex
-                                    tmpTable.rowNum = rowNum
-                                    tmpTable.columnNum = columnNum
-                                    self.saveTable(tmpTable,rowNum,columnNum,pageElementNum)
-                                    tableSavedFlag = True
-                                # 结束表清空tmptable相关变量
-                                tableStartIndex = 0
-                                rowNum = 1
-                                columnNum = 1
-                                columnIndex = 1
-                                tableEndIndex = 0
-                                del tmpTable    
+                                self.logger.debug("Find Cell row>1,column>1 (rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex,pageElement.get_text()))
                                 
-                elif 't' == pageElement['class'][0]:
+                        else:
+                            #与前一个元素的Y不等，与前列个元素的X相等----除(1,1)以外的第一列元素
+                            if pageElement['class'][1] == compareColumnElemnt['class'][1]:
+                                if tableStartIndex != 0:
+                                    rowNum += 1
+                                    columnNum = columnIndex
+                                    columnIndex = 1
+                                self.logger.debug("Find first column cell(rowIndex,columnIndex,value) (%s,%s,%s)" % (rowNum, columnIndex, pageElement.get_text()))
+                                tmpTable.setCellValue(rowNum-1, columnIndex-1, pageElement.get_text())                            
+                               
+                            else:
+                                # 与前一个Y坐标不等，与前列个X坐标不等----table结束
+                                if tableStartIndex != 0:
+                                    tableEndIndex = elementIndex
+                                    self.logger.info("Table is ended due to Y!=,X!= with info(rowNum,columnNum,tableEndIndex,content,pageNum) (%s,%s,%s,%s,%s)" % (rowNum, columnIndex, tableEndIndex, pageElement.get_text(),pageNum))
+                                    #Save tableEndIndex, rowNum, columnNum append tableList
+                                    if tableSavedFlag == False and rowNum >= 1 and columnNum > 1:
+                                        tmpTable.tableEndIndex = tableEndIndex
+                                        tmpTable.rowNum = rowNum
+                                        tmpTable.columnNum = columnNum
+                                        self.saveTable(tmpTable,rowNum,columnNum,pageElementNum)
+                                        tableSavedFlag = True
+                                    # 结束表清空tmptable相关变量
+                                    tableStartIndex = 0
+                                    rowNum = 1
+                                    columnNum = 1
+                                    columnIndex = 1
+                                    tableEndIndex = 0
+                                    tmpTable.reset()
+                                    
+                    elif 't' == pageElement['class'][0]:
+                        if tableStartIndex != 0:
+                            tableEndIndex = elementIndex
+                            self.logger.info("Table is ended due to find a class t info(rowNum,columnNum,tableEndIndex,pageNum) (%s,%s,%s,%s)" % (rowNum, columnIndex, tableEndIndex,pageNum))
+                            #Save tableEndIndex, rowNum, columnNum
+                            if tableSavedFlag == False and rowNum >= 1 and columnNum > 1:
+                                tmpTable.tableEndIndex = tableEndIndex
+                                tmpTable.rowNum = rowNum
+                                tmpTable.columnNum = columnNum
+                                self.saveTable(tmpTable,rowNum,columnNum,pageElementNum)
+                                tableSavedFlag = True
+                            # 结束表清空tmptable相关变量
+                            tableStartIndex = 0
+                            rowNum = 1
+                            columnNum = 1
+                            columnIndex = 1
+                            tableEndIndex = 0
+                            tmpTable.reset()      
+                #检索完最后一个元素，跳出死循环
+                else:
                     if tableStartIndex != 0:
                         tableEndIndex = elementIndex
-                        self.logger.info("Table is ended due to find a class t info(rowNum,columnNum,tableEndIndex) (%s,%s,%s)" % (rowNum, columnIndex, tableEndIndex))
+                        self.logger.info("Table is ended due to last element info(rowNum,columnNum,tableEndIndex,pageNum) (%s,%s,%s,%s)" % (rowNum, columnIndex, tableEndIndex,pageNum))
                         #Save tableEndIndex, rowNum, columnNum
                         if tableSavedFlag == False and rowNum >= 1 and columnNum > 1:
                             tmpTable.tableEndIndex = tableEndIndex
@@ -257,34 +291,15 @@ class PdfHtmlExtractor(object):
                             tmpTable.columnNum = columnNum
                             self.saveTable(tmpTable,rowNum,columnNum,pageElementNum)
                             tableSavedFlag = True
+                        self.logger.info("Page %s fetch end" % pageNum)
                         # 结束表清空tmptable相关变量
                         tableStartIndex = 0
                         rowNum = 1
                         columnNum = 1
                         columnIndex = 1
                         tableEndIndex = 0
-                        del tmpTable    
-            #检索完最后一个元素，跳出死循环
-            else:
-                if tableStartIndex != 0:
-                    tableEndIndex = elementIndex
-                    self.logger.info("Table is ended due to last element info(rowNum,columnNum,tableEndIndex) (%s,%s,%s)" % (rowNum, columnIndex, tableEndIndex))
-                    #Save tableEndIndex, rowNum, columnNum
-                    if tableSavedFlag == False and rowNum >= 1 and columnNum > 1:
-                        tmpTable.tableEndIndex = tableEndIndex
-                        tmpTable.rowNum = rowNum
-                        tmpTable.columnNum = columnNum
-                        self.saveTable(tmpTable,rowNum,columnNum,pageElementNum)
-                        tableSavedFlag = True
-                    self.logger.info("Page %s fetch end" % pageNum)
-                    # 结束表清空tmptable相关变量
-                    tableStartIndex = 0
-                    rowNum = 1
-                    columnNum = 1
-                    columnIndex = 1
-                    tableEndIndex = 0
-                    del tmpTable   
-                break
+                        tmpTable.reset()   
+                    break
             
             # 获取下一个元素
             pageElement =pageElement.next_sibling
@@ -292,7 +307,8 @@ class PdfHtmlExtractor(object):
         
         return True
     
-    def getOutLine(self):
+    #返回需要分析表格的起始位置， paragraphPageList[0....n-3,n-2,n-1,n] 0:起始页  n-2:起始页起始位置  n-3:结束页  n-1:结束页位置  n:需分析表格 
+    def getFetchTablePageLists(self):
         outlines=self.soup.find_all('div',{'id':'outline'})
         outlineIndex = 0
         times = 0
@@ -306,9 +322,31 @@ class PdfHtmlExtractor(object):
             outlineIndex += 1
             
         self.logger.info("Page range: 合并资产负债表 (%s,%s), 合并利润表 (%s,%s), 合并现金流量表 (%s,%s)" % (self.pageRange1[0], self.pageRange1[1], self.pageRange2[0], self.pageRange2[1], self.pageRange3[0], self.pageRange3[1]))
-        self.createPageList(self.pageRange1)
-        self.createPageList(self.pageRange2)
-        self.createPageList(self.pageRange3)
+
+        self.paragraphPageList1 = self.createPageList(self.pageRange1)
+        startIndexInPage1 = self.getPageElementIndexOrTotalNum(self.paragraphPageList1[0],u'合并资产负债表')
+        endIndexInPage1 = self.getPageElementIndexOrTotalNum(self.paragraphPageList1[len(self.paragraphPageList1)-1],u'母公司资产负债表')
+        self.paragraphPageList1.append(startIndexInPage1)
+        self.paragraphPageList1.append(endIndexInPage1)
+        self.paragraphPageList1.append(u'合并资产负债表')
+        
+        self.paragraphPageList2 = self.createPageList(self.pageRange2)
+        startIndexInPage2 = self.getPageElementIndexOrTotalNum(self.paragraphPageList2[0],u'合并利润表')
+        endIndexInPage2 = self.getPageElementIndexOrTotalNum(self.paragraphPageList2[len(self.paragraphPageList2)-1],u'母公司利润表')
+        self.paragraphPageList2.append(startIndexInPage2)
+        self.paragraphPageList2.append(endIndexInPage2)
+        self.paragraphPageList2.append(u'合并利润表')
+        
+        self.paragraphPageList3 = self.createPageList(self.pageRange3)
+        startIndexInPage3 = self.getPageElementIndexOrTotalNum(self.paragraphPageList3[0],u'合并现金流量表')
+        endIndexInPage3 = self.getPageElementIndexOrTotalNum(self.paragraphPageList3[len(self.paragraphPageList3)-1],u'母公司现金流量表')
+        self.paragraphPageList3.append(startIndexInPage3)
+        self.paragraphPageList3.append(endIndexInPage3)
+        self.paragraphPageList3.append(u'合并现金流量表')
+        
+        print "paragraphPageList1:", self.paragraphPageList1
+        print "paragraphPageList2:", self.paragraphPageList2
+        print "paragraphPageList3:", self.paragraphPageList3
         
     def processNode(self, node, level):
         
@@ -353,20 +391,41 @@ class PdfHtmlExtractor(object):
             pageNum += 1
         
         print "PdfHtmlExtractor:createPageList  pageList:", pageList
+        return pageList
         #self.logger.debug("pageList: (%l)")% (pageList)
-                        
-    def findStrPosInPage(self, str, pageNum):
-        pageContent = self.getPageContent(pageNum)
         
+    def fetchTableInParagraph(self):
+        pageNums = len(pdfhtmlextact.paragraphPageList1)-3
+        if(2==pageNums and pdfhtmlextact.paragraphPageList1[0] == pdfhtmlextact.paragraphPageList1[1]):
+            pdfhtmlextact.getTablesinPage(pdfhtmlextact.paragraphPageList1[0],pdfhtmlextact.paragraphPageList1[pageNums],pdfhtmlextact.paragraphPageList1[pageNums+1])
+        else:
+            for i in range(0,pageNums):
+                startIndex=0
+                endIndex=65535
+                if 0==i:
+                    startIndex=pdfhtmlextact.paragraphPageList1[pageNums]
+                if pageNums-1==i:
+                    endIndex=pdfhtmlextact.paragraphPageList1[pageNums+1]
+                tableInpage = pdfhtmlextact.getTablesinPage(pdfhtmlextact.paragraphPageList1[i],startIndex,endIndex)
+        print "tableList:",len(pdfhtmlextact.tableList)
+    
+    def mergeTableList(self):
+        #
+        
+        for table in range(0, len(self.tableList)):
+            for row in range(0,self.tableList[table].rowNum):
+                for column in range(0,self.tableList[table].columnNum):
+                    self.tableList[table].getCellValue(row,column)
+        
+        
+                   
+    def clearTableList(self):
+        #处理完
+        
+        return
     
     
 if __name__ == '__main__':
     pdfhtmlextact = PdfHtmlExtractor('../2014.html')
-    pdfhtmlextact.getOutLine()
-    
-    
-    #pageList = pdfhtmlextact.getSectionStartEndPage(u" 财务报告")
+    pdfhtmlextact.getFetchTablePageLists()
 
-    #for page in pageList:    
-        #tableinpage = pdfhtmlextact.getTablesinPage(page)
-        

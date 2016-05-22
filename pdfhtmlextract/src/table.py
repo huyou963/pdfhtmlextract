@@ -32,6 +32,18 @@ class Table(object):
         
     def isValidTable(self):
         return True
+    def reset(self):
+        
+        for row in range(0,self.rowNum):
+            for column in range(0,self.columnNum):
+                self.setCellValue(row, column, "")
+        self.pageNum = 0
+        self.tableStartIndex = 0
+        self.tableEndIndex = 0
+        self.rowNum = 0
+        self.columnNum = 0
+        self.preExtend = 2    #0：没有前续表。 1：有前续表。 2：初始值
+        self.aftExtend = 2    #0：没有后续表。 1：有后续表。 2：初始值
      
 if __name__ == '__main__':
     my = Table(5,3)
