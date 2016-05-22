@@ -14,17 +14,17 @@ import string
 class PdfHtmlExtractor(object):
     htmlfile = ''
     soup = ''
-    tableList = []   #保存每页中找到的
-    table1=[0,0]
-    table2=[0,0]
-    table3=[0,0]
+    tableList = []   #保存每页中找到的table 之后需要判断是否需要合并table
+    pageRange1=[0,0]     #save table page range
+    pageRange2=[0,0]
+    pageRange3=[0,0]
     
     def __init__(self, htmlfile):
         
         htmlfilelog = htmlfile + '.log'
         if os.path.exists(htmlfilelog):
             os.remove(htmlfilelog)
-        self.logger = Logger(logname=htmlfilelog, loglevel="INFO", logger=__name__).getlogger()
+        self.logger = Logger(logname=htmlfilelog, loglevel="DEBUG", logger=__name__).getlogger()
         self.logger.info("Begin extract: %s" % htmlfile)
         
         self.htmlfile = htmlfile
@@ -302,14 +302,18 @@ class PdfHtmlExtractor(object):
                 return
             for child in outline.children:
                 self.processNode(child, times)
-            #print "len(outline)!!!outline.contents", len(outline.contents), outline.contents
+
             outlineIndex += 1
-        print "start-end:",self.table1[0],self.table1[1] ,self.table2[0],self.table2[1],self.table3[0],self.table3[1]
+            
+        self.logger.info("Page range: 合并资产负债表 (%s,%s), 合并利润表 (%s,%s), 合并现金流量表 (%s,%s)" % (self.pageRange1[0], self.pageRange1[1], self.pageRange2[0], self.pageRange2[1], self.pageRange3[0], self.pageRange3[1]))
+        self.createPageList(self.pageRange1)
+        self.createPageList(self.pageRange2)
+        self.createPageList(self.pageRange3)
         
-    def processNode(self, node, times):
+    def processNode(self, node, level):
         
         if node.name == "a":
-            print "string a",node.string, "times:", times, "href:",string.atoi(node['href'][3:],base=16)
+            self.logger.debug("Find a title (TitleName, Level, href) (%s,%s,%s)" % (node.string, level, string.atoi(node['href'][3:],base=16)))
         if node.name == "li":
             for child in node.children:
                 if child.name == "a":
@@ -318,33 +322,51 @@ class PdfHtmlExtractor(object):
                     strTable3 = u"合并现金流量表"
                     pageNum=string.atoi(child['href'][3:],base=16)
                     if re.search(strTable1, child.string):
-                        self.table1[0]=pageNum
-                    elif 0!=self.table1[0] and 0==self.table1[1]:
-                        self.table1[1]=pageNum
+                        self.pageRange1[0]=pageNum
+                    elif 0!=self.pageRange1[0] and 0==self.pageRange1[1]:
+                        self.pageRange1[1]=pageNum
                     
                     if re.search(strTable2, child.string):
-                        self.table2[0]=pageNum
-                    elif 0!=self.table2[0] and 0==self.table2[1]:
-                        self.table2[1]=pageNum
+                        self.pageRange2[0]=pageNum
+                    elif 0!=self.pageRange2[0] and 0==self.pageRange2[1]:
+                        self.pageRange2[1]=pageNum
                         
                     if re.search(strTable3, child.string):
-                        self.table3[0]=pageNum
-                    elif 0!=self.table3[0] and 0==self.table3[1]:
-                        self.table3[1]=pageNum
-                        
-                    print "string li.a",child.string, "times:", times, "href:",string.atoi(child['href'][3:],base=16)
+                        self.pageRange3[0]=pageNum
+                    elif 0!=self.pageRange3[0] and 0==self.pageRange3[1]:
+                        self.pageRange3[1]=pageNum
+                    self.logger.debug("Find a title under li (TitleName, Level, href) (%s,%s,%s)" % (child.string, level, string.atoi(child['href'][3:],base=16)))
                 if child.name == "ul":
-                    self.processNode(child,times)
+                    self.processNode(child,level)
         if node.name == "ul":
-            times += 1
+            level += 1
             for child in node.children:
-                self.processNode(child,times)
-                
+                self.processNode(child,level)
+    
+    def createPageList(self, pageRange):
+        pageList = []
+        pageNum = pageRange[0]
+        while pageNum <= pageRange[1]:
+            tempPage = pageNum
+            tempPage = "pf" + hex(tempPage)[2:]
+            pageList.append(tempPage)
+            pageNum += 1
+        
+        print "PdfHtmlExtractor:createPageList  pageList:", pageList
+        #self.logger.debug("pageList: (%l)")% (pageList)
+                        
+    def findStrPosInPage(self, str, pageNum):
+        pageContent = self.getPageContent(pageNum)
+        
+    
     
 if __name__ == '__main__':
     pdfhtmlextact = PdfHtmlExtractor('../2014.html')
-    pageList = pdfhtmlextact.getSectionStartEndPage(u" 财务报告")
+    pdfhtmlextact.getOutLine()
+    
+    
+    #pageList = pdfhtmlextact.getSectionStartEndPage(u" 财务报告")
 
-    for page in pageList:    
-        tableinpage = pdfhtmlextact.getTablesinPage(page)
+    #for page in pageList:    
+        #tableinpage = pdfhtmlextact.getTablesinPage(page)
         
