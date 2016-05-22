@@ -14,8 +14,8 @@ import string
 class PdfHtmlExtractor(object):
     htmlfile = ''
     soup = ''
-    tableList = []   #保存每页中找到的table 之后需要判断是否需要合并table
-    pageRange1=[0,0]     #save table page range
+    tableList = []              #保存一个章节里每页中找到的table 之后需要判断是否需要合并table
+    pageRange1=[0,0]            #save table page range
     pageRange2=[0,0]
     pageRange3=[0,0]
     paragraphPageList1 = []
@@ -32,48 +32,6 @@ class PdfHtmlExtractor(object):
         
         self.htmlfile = htmlfile
         self.soup = BeautifulSoup(open(self.htmlfile), "html.parser")
-        
-    def getSectionStartEndPage(self,sectionName):
-        
-        pageList = []
-        startPage = ''
-        endPage = ''
-        
-        if sectionName == None:
-            self.logger.error("sectionName is None")
-            return None
-        
-        self.logger.info("Begin find Page range of section: %s" % sectionName)
-        
-        #Find section start/end page from catalogue
-        outline=self.soup.find_all('div',{'id':'outline'})
-        for li in outline:
-            li_list = li.find_all('li')
-            for li in li_list:
-                if re.search(sectionName, li.a.get_text()):
-                    secondLiList = li.find_all('li')
-                    for secondLi in secondLiList:
-                        regex = u"财务报表"
-                        if re.search(regex, secondLi.a.get_text()):
-                            print "secondLi",secondLi.encode('utf-8')
-                            startPage = secondLi.a['href'][1:]
-                            endPage = secondLi.next_sibling.a['href'][1:]
-        
-        #Get page list between start/end
-        pagesContainer=self.soup.find_all('div',id=re.compile("pf"))
-        startParse=0
-        for page in pagesContainer:
-            if(page['id']==startPage):
-                startParse=1
-            elif (page['id']==endPage):
-                startParse=0
-                exit
-            if(startParse==1):
-                pageList.append(page['id'])
-        
-        self.logger.info("Section:%s, Page list is: %s" % (sectionName, pageList))
-        
-        return pageList
     
     def getPageContent(self,pageNum):
         
@@ -85,35 +43,6 @@ class PdfHtmlExtractor(object):
         else:
             self.logger.error("pageLen=", len(pageContentList))            
         return None
-
-    def saveTable(self, tmpTable, rowNum, columnNum, pageElementNum):
-        myTable = Table(rowNum,columnNum)
-        myTable.tableStartIndex = tmpTable.tableStartIndex
-        myTable.tableEndIndex = tmpTable.tableEndIndex
-        myTable.rowNum = rowNum
-        myTable.columnNum = columnNum
-        myTable.pageNum = tmpTable.pageNum
-        
-        print "!!",tmpTable.tableEndIndex,tmpTable.tableStartIndex
-        #判断是否有前后续表
-        if tmpTable.tableStartIndex < 5:
-            myTable.preExtend = 1
-        else:
-            myTable.preExtend = 0
-        if (pageElementNum - tmpTable.tableEndIndex) < 5:
-            myTable.aftExtend = 1
-        else:
-            myTable.aftExtend = 0
-            
-        #保存表格内容
-        for row in range(0,rowNum):
-            for column in range(0,columnNum):
-                myTable.setCellValue(row, column, tmpTable.getCellValue(row,column))
-                self.logger.debug("Save cell (row, column, tmpTablevalue, myTablevalue) (%s, %s, %s ,%s)" % (row, column, tmpTable.getCellValue(row,column), myTable.getCellValue(row, column)))
-                 
-        self.tableList.append(myTable)
-
-        return
     
     #cmpStr==None return total num of page element, cmpStr!=None return cmpStr position in page    
     def getPageElementIndexOrTotalNum(self,pageNum,cmpStr=None):
@@ -141,37 +70,47 @@ class PdfHtmlExtractor(object):
         else:
             self.logger.error("Cann't find str:%s in page:%s" % (cmpStr,pageNum))    
             return None
+    
+    def getCompareColumnElemnt2(self, pageElement, columnNum):
+        if columnNum !=0:
+            columnNum -= 1
+            compareColumnElement = self.getCompareColumnElemnt2(pageElement.previous_sibling, columnNum)
+            return compareColumnElement
+        else:
+            return compareColumnElement
+    
         
     def getCompareColumnElemnt(self, pageElement, columnNum):
         if columnNum == 1:
-            compareColumnElemnt = pageElement.previous_sibling
+            compareColumnElement = pageElement.previous_sibling
         if columnNum == 2:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling
+            compareColumnElement = pageElement.previous_sibling.previous_sibling
         if columnNum == 3:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling
+            compareColumnElement = pageElement.previous_sibling.previous_sibling.previous_sibling
         if columnNum == 4:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+            compareColumnElement = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         if columnNum == 5:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+            compareColumnElement = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         if columnNum == 6:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+            compareColumnElement = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         if columnNum == 7:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+            compareColumnElement = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         if columnNum == 8:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+            compareColumnElement = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         if columnNum == 9:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+            compareColumnElement = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         if columnNum == 10:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+            compareColumnElement = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         if columnNum == 11:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+            compareColumnElement = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
         if columnNum == 12:
-            compareColumnElemnt = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
-        return compareColumnElemnt
+            compareColumnElement = pageElement.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling.previous_sibling
+        return compareColumnElement
     
+    #若startElementIndex，startElementIndex值有效，则处理每一页在在他们之间的元素
     def getTablesinPage(self, pageNum, startElementIndex=0, endElementIndex=65535):
         
-        print "getTableInPage:", startElementIndex, endElementIndex
+        self.logger.info("Page %s fetch start" % pageNum)
         pageContent = self.getPageContent(pageNum)
         if pageContent == None:
             self.logger.error("Get page content None")
@@ -291,7 +230,7 @@ class PdfHtmlExtractor(object):
                             tmpTable.columnNum = columnNum
                             self.saveTable(tmpTable,rowNum,columnNum,pageElementNum)
                             tableSavedFlag = True
-                        self.logger.info("Page %s fetch end" % pageNum)
+                        
                         # 结束表清空tmptable相关变量
                         tableStartIndex = 0
                         rowNum = 1
@@ -304,52 +243,39 @@ class PdfHtmlExtractor(object):
             # 获取下一个元素
             pageElement =pageElement.next_sibling
             elementIndex += 1
-        
+            
+        self.logger.info("Page %s fetch end" % pageNum)        
         return True
     
-    #返回需要分析表格的起始位置， paragraphPageList[0....n-3,n-2,n-1,n] 0:起始页  n-2:起始页起始位置  n-3:结束页  n-1:结束页位置  n:需分析表格 
-    def getFetchTablePageLists(self):
-        outlines=self.soup.find_all('div',{'id':'outline'})
-        outlineIndex = 0
-        times = 0
-        for outline in outlines:
-            if outlineIndex > 1:
-                print "Find more than one outline"
-                return
-            for child in outline.children:
-                self.processNode(child, times)
-
-            outlineIndex += 1
+    def saveTable(self, tmpTable, rowNum, columnNum, pageElementNum):
+        myTable = Table(rowNum,columnNum)
+        myTable.tableStartIndex = tmpTable.tableStartIndex
+        myTable.tableEndIndex = tmpTable.tableEndIndex
+        myTable.rowNum = rowNum
+        myTable.columnNum = columnNum
+        myTable.pageNum = tmpTable.pageNum
+        
+        #判断是否有前后续表
+        if tmpTable.tableStartIndex < 5:
+            myTable.preExtend = 1
+        else:
+            myTable.preExtend = 0
+        if (pageElementNum - tmpTable.tableEndIndex) < 5:
+            myTable.aftExtend = 1
+        else:
+            myTable.aftExtend = 0
             
-        self.logger.info("Page range: 合并资产负债表 (%s,%s), 合并利润表 (%s,%s), 合并现金流量表 (%s,%s)" % (self.pageRange1[0], self.pageRange1[1], self.pageRange2[0], self.pageRange2[1], self.pageRange3[0], self.pageRange3[1]))
+        #保存表格内容
+        for row in range(0,rowNum):
+            for column in range(0,columnNum):
+                myTable.setCellValue(row, column, tmpTable.getCellValue(row,column))
+                self.logger.debug("Save cell (row, column, tmpTablevalue, myTablevalue) (%s, %s, %s ,%s)" % (row, column, tmpTable.getCellValue(row,column), myTable.getCellValue(row, column)))
+                 
+        self.tableList.append(myTable)
 
-        self.paragraphPageList1 = self.createPageList(self.pageRange1)
-        startIndexInPage1 = self.getPageElementIndexOrTotalNum(self.paragraphPageList1[0],u'合并资产负债表')
-        endIndexInPage1 = self.getPageElementIndexOrTotalNum(self.paragraphPageList1[len(self.paragraphPageList1)-1],u'母公司资产负债表')
-        self.paragraphPageList1.append(startIndexInPage1)
-        self.paragraphPageList1.append(endIndexInPage1)
-        self.paragraphPageList1.append(u'合并资产负债表')
-        
-        self.paragraphPageList2 = self.createPageList(self.pageRange2)
-        startIndexInPage2 = self.getPageElementIndexOrTotalNum(self.paragraphPageList2[0],u'合并利润表')
-        endIndexInPage2 = self.getPageElementIndexOrTotalNum(self.paragraphPageList2[len(self.paragraphPageList2)-1],u'母公司利润表')
-        self.paragraphPageList2.append(startIndexInPage2)
-        self.paragraphPageList2.append(endIndexInPage2)
-        self.paragraphPageList2.append(u'合并利润表')
-        
-        self.paragraphPageList3 = self.createPageList(self.pageRange3)
-        startIndexInPage3 = self.getPageElementIndexOrTotalNum(self.paragraphPageList3[0],u'合并现金流量表')
-        endIndexInPage3 = self.getPageElementIndexOrTotalNum(self.paragraphPageList3[len(self.paragraphPageList3)-1],u'母公司现金流量表')
-        self.paragraphPageList3.append(startIndexInPage3)
-        self.paragraphPageList3.append(endIndexInPage3)
-        self.paragraphPageList3.append(u'合并现金流量表')
-        
-        print "paragraphPageList1:", self.paragraphPageList1
-        print "paragraphPageList2:", self.paragraphPageList2
-        print "paragraphPageList3:", self.paragraphPageList3
-        
-    def processNode(self, node, level):
-        
+        return
+    
+    def processNode(self, node, level): 
         if node.name == "a":
             self.logger.debug("Find a title (TitleName, Level, href) (%s,%s,%s)" % (node.string, level, string.atoi(node['href'][3:],base=16)))
         if node.name == "li":
@@ -381,6 +307,49 @@ class PdfHtmlExtractor(object):
             for child in node.children:
                 self.processNode(child,level)
     
+    
+    #返回需要分析表格的起始位置， paragraphPageList[0....n-3,n-2,n-1,n] 0:起始页  n-2:起始页起始位置  n-3:结束页  n-1:结束页位置  n:需分析表格 
+    def getFetchTablePageLists(self):
+        outlines=self.soup.find_all('div',{'id':'outline'})
+        outlineIndex = 0
+        times = 0
+        for outline in outlines:
+            if outlineIndex > 1:
+                self.logger.error("Find more than one outline")
+                return False
+            for child in outline.children:
+                self.processNode(child, times)
+
+            outlineIndex += 1
+            
+        self.logger.info("Page range: 合并资产负债表 (%s,%s), 合并利润表 (%s,%s), 合并现金流量表 (%s,%s)" % (self.pageRange1[0], self.pageRange1[1], self.pageRange2[0], self.pageRange2[1], self.pageRange3[0], self.pageRange3[1]))
+
+        self.paragraphPageList1 = self.createPageList(self.pageRange1)
+        startIndexInPage1 = self.getPageElementIndexOrTotalNum(self.paragraphPageList1[0],u'合并资产负债表')
+        endIndexInPage1 = self.getPageElementIndexOrTotalNum(self.paragraphPageList1[len(self.paragraphPageList1)-1],u'母公司资产负债表')
+        self.paragraphPageList1.append(startIndexInPage1)
+        self.paragraphPageList1.append(endIndexInPage1)
+        self.paragraphPageList1.append(u'合并资产负债表')
+        
+        self.paragraphPageList2 = self.createPageList(self.pageRange2)
+        startIndexInPage2 = self.getPageElementIndexOrTotalNum(self.paragraphPageList2[0],u'合并利润表')
+        endIndexInPage2 = self.getPageElementIndexOrTotalNum(self.paragraphPageList2[len(self.paragraphPageList2)-1],u'母公司利润表')
+        self.paragraphPageList2.append(startIndexInPage2)
+        self.paragraphPageList2.append(endIndexInPage2)
+        self.paragraphPageList2.append(u'合并利润表')
+        
+        self.paragraphPageList3 = self.createPageList(self.pageRange3)
+        startIndexInPage3 = self.getPageElementIndexOrTotalNum(self.paragraphPageList3[0],u'合并现金流量表')
+        endIndexInPage3 = self.getPageElementIndexOrTotalNum(self.paragraphPageList3[len(self.paragraphPageList3)-1],u'母公司现金流量表')
+        self.paragraphPageList3.append(startIndexInPage3)
+        self.paragraphPageList3.append(endIndexInPage3)
+        self.paragraphPageList3.append(u'合并现金流量表')
+        
+        print "paragraphPageList1:", self.paragraphPageList1
+        print "paragraphPageList2:", self.paragraphPageList2
+        print "paragraphPageList3:", self.paragraphPageList3
+        return True
+    
     def createPageList(self, pageRange):
         pageList = []
         pageNum = pageRange[0]
@@ -390,42 +359,63 @@ class PdfHtmlExtractor(object):
             pageList.append(tempPage)
             pageNum += 1
         
-        print "PdfHtmlExtractor:createPageList  pageList:", pageList
         return pageList
         #self.logger.debug("pageList: (%l)")% (pageList)
         
-    def fetchTableInParagraph(self):
-        pageNums = len(pdfhtmlextact.paragraphPageList1)-3
-        if(2==pageNums and pdfhtmlextact.paragraphPageList1[0] == pdfhtmlextact.paragraphPageList1[1]):
-            pdfhtmlextact.getTablesinPage(pdfhtmlextact.paragraphPageList1[0],pdfhtmlextact.paragraphPageList1[pageNums],pdfhtmlextact.paragraphPageList1[pageNums+1])
+    def fetchTableInParagraph(self,paragraphPageList):
+        pageNums = len(paragraphPageList)-3
+        if(2==pageNums and paragraphPageList[0] == paragraphPageList[1]):
+            self.getTablesinPage(paragraphPageList[0],paragraphPageList[pageNums],paragraphPageList[pageNums+1])
         else:
             for i in range(0,pageNums):
                 startIndex=0
                 endIndex=65535
                 if 0==i:
-                    startIndex=pdfhtmlextact.paragraphPageList1[pageNums]
+                    startIndex=paragraphPageList[pageNums]
                 if pageNums-1==i:
-                    endIndex=pdfhtmlextact.paragraphPageList1[pageNums+1]
-                tableInpage = pdfhtmlextact.getTablesinPage(pdfhtmlextact.paragraphPageList1[i],startIndex,endIndex)
-        print "tableList:",len(pdfhtmlextact.tableList)
+                    endIndex=paragraphPageList[pageNums+1]
+                #    
+                self.getTablesinPage(paragraphPageList[i],startIndex,endIndex)
+        
+        print "tableList:",len(self.tableList)
     
     def mergeTableList(self):
-        #
-        
+        #暂时没有添加判断各表是否有扩展，需要把表连起来的功能。默认tableList里的表都是这一段的完整表
         for table in range(0, len(self.tableList)):
             for row in range(0,self.tableList[table].rowNum):
                 for column in range(0,self.tableList[table].columnNum):
                     self.tableList[table].getCellValue(row,column)
-        
+        return
+    
+    def clearTableList(self):
+        #一个段落的表格写入数据库后清理tableList
+        self.tableList = []
+        return
+ 
+    
+    def writeTableinDB(self):
+        #把一段里的表写到数据库内
+        return    
         
                    
-    def clearTableList(self):
-        #处理完
-        
-        return
     
     
 if __name__ == '__main__':
     pdfhtmlextact = PdfHtmlExtractor('../2014.html')
     pdfhtmlextact.getFetchTablePageLists()
-
+    pdfhtmlextact.fetchTableInParagraph(pdfhtmlextact.paragraphPageList1)
+    pdfhtmlextact.mergeTableList()
+    pdfhtmlextact.writeTableinDB()
+    pdfhtmlextact.clearTableList()
+    
+    pdfhtmlextact.fetchTableInParagraph(pdfhtmlextact.paragraphPageList2)
+    pdfhtmlextact.mergeTableList()
+    pdfhtmlextact.writeTableinDB()
+    pdfhtmlextact.clearTableList()
+    
+    pdfhtmlextact.fetchTableInParagraph(pdfhtmlextact.paragraphPageList3)
+    pdfhtmlextact.mergeTableList()
+    pdfhtmlextact.writeTableinDB()
+    pdfhtmlextact.clearTableList()
+    
+    
